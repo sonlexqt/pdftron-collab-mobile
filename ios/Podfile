@@ -1,4 +1,4 @@
-platform :ios, '9.0'
+platform :ios, '10.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 def add_flipper_pods!(versions = {})
@@ -76,6 +76,10 @@ target 'PDFTronCollab' do
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
+  #pod 'PDFNet', podspec: 'https://www.pdftron.com/downloads/ios/cocoapods/pdfnet/latest.podspec'
+  pod 'PDFNet', podspec: 'http://nightly.pdftron.com.s3.amazonaws.com/stable/2020-04-28/7.1/cocoapods/pdfnet/2020-04-28_stable_rev74739.podspec'
+  pod 'RNPdftron', :path => '../node_modules/react-native-pdftron'
 
   target 'PDFTronCollabTests' do
     inherit! :complete
