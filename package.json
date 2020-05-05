@@ -11,11 +11,15 @@
   },
   "dependencies": {
     "react": "16.11.0",
-    "react-native": "0.62.2"
+    "react-native": "0.62.2",
+    "react-native-pdftron": "github:PDFTron/pdftron-react-native"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
+    "@react-native-community/cli": "^4.8.0",
+    "@react-native-community/cli-platform-android": "^4.8.0",
+    "@react-native-community/cli-platform-ios": "^4.8.0",
     "@react-native-community/eslint-config": "^0.0.5",
     "babel-jest": "^24.9.0",
     "eslint": "^6.5.1",
