@@ -81,10 +81,11 @@ export default class App extends Component<Props> {
     }
 
     const path = "https://pdftron.s3.amazonaws.com/downloads/pl/PDFTRON_mobile_about.pdf";
+    const wvsPath = `http://192.168.1.182:8090/blackbox/GetPDF?uri=${encodeURIComponent(path)}&fmt=data`;
 
     return (
       <DocumentView
-        document={path}
+        document={wvsPath}
         showLeadingNavButton={true}
         leadingNavButtonIcon={Platform.OS === 'ios' ? 'ic_close_black_24px.png' : 'ic_arrow_back_white_24dp'}
         onLeadingNavButtonPressed={this.onLeadingNavButtonPressed}
