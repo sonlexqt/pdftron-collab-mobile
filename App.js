@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   Platform,
   StyleSheet,
@@ -7,22 +7,21 @@ import {
   PermissionsAndroid,
   BackHandler,
   NativeModules,
-  Alert
+  Alert,
 } from 'react-native';
 
-import { DocumentView, RNPdftron } from 'react-native-pdftron';
+import {DocumentView, RNPdftron} from 'react-native-pdftron';
 
 type Props = {};
 export default class App extends Component<Props> {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      permissionGranted: Platform.OS === 'ios' ? true : false
+      permissionGranted: Platform.OS === 'ios' ? true : false,
     };
 
-    RNPdftron.initialize("Insert commercial license key here after purchase");
+    RNPdftron.initialize('Insert commercial license key here after purchase');
     RNPdftron.enableJavaScript(true);
   }
 
@@ -35,18 +34,18 @@ export default class App extends Component<Props> {
   async requestStoragePermission() {
     try {
       const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         this.setState({
-          permissionGranted: true
+          permissionGranted: true,
         });
-        console.log("Storage permission granted");
+        console.log('Storage permission granted');
       } else {
         this.setState({
-          permissionGranted: false
+          permissionGranted: false,
         });
-        console.log("Storage permission denied");
+        console.log('Storage permission denied');
       }
     } catch (err) {
       console.warn(err);
@@ -59,35 +58,38 @@ export default class App extends Component<Props> {
       Alert.alert(
         'App',
         'onLeadingNavButtonPressed',
-        [
-          {text: 'OK', onPress: () => console.log('OK Pressed')},
-        ],
-        { cancelable: true }
-      )
+        [{text: 'OK', onPress: () => console.log('OK Pressed')}],
+        {cancelable: true},
+      );
     } else {
       BackHandler.exitApp();
     }
-  }
+  };
 
   render() {
     if (!this.state.permissionGranted) {
       return (
         <View style={styles.container}>
-          <Text>
-            Storage permission required.
-          </Text>
+          <Text>Storage permission required.</Text>
         </View>
-      )
+      );
     }
 
-    const path = "https://pdftron.s3.amazonaws.com/downloads/pl/PDFTRON_mobile_about.pdf";
-    const wvsPath = `http://192.168.1.182:8090/blackbox/GetPDF?uri=${encodeURIComponent(path)}&fmt=data`;
+    const path =
+      'https://pdftron.s3.amazonaws.com/downloads/pl/PDFTRON_mobile_about.pdf';
+    const wvsPath = `http://192.168.1.54:8090/blackbox/GetPDF?uri=${encodeURIComponent(
+      path,
+    )}&fmt=data`;
 
     return (
       <DocumentView
-        document={wvsPath}
+        document={path}
         showLeadingNavButton={true}
-        leadingNavButtonIcon={Platform.OS === 'ios' ? 'ic_close_black_24px.png' : 'ic_arrow_back_white_24dp'}
+        leadingNavButtonIcon={
+          Platform.OS === 'ios'
+            ? 'ic_close_black_24px.png'
+            : 'ic_arrow_back_white_24dp'
+        }
         onLeadingNavButtonPressed={this.onLeadingNavButtonPressed}
       />
     );
@@ -100,5 +102,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  }
+  },
 });
