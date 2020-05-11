@@ -71,15 +71,21 @@ export default class App extends Component {
   };
 
   onDocumentLoaded = () => {
-    axios.get(`http://${SERVER_URL}:3000/api/annotations`).then(res => {
-      const annotations = res.data;
-      annotations.map(a =>
-        this._viewer.importAnnotations(a.xfdf).catch(err => {
-          console.log('err');
-          console.log(err);
-        }),
-      );
-    });
+    axios
+      .get(`http://${SERVER_URL}:3000/api/annotations`, {
+        params: {
+          documentId: this.state.documentId,
+        },
+      })
+      .then(res => {
+        const annotations = res.data;
+        annotations.map(a =>
+          this._viewer.importAnnotations(a.xfdf).catch(err => {
+            console.log('err');
+            console.log(err);
+          }),
+        );
+      });
     this.socket = io(`http://${SERVER_URL}:4000`);
     this.socket.on('annotationUpdated', this.onAnnotationUpdated);
   };
@@ -90,12 +96,11 @@ export default class App extends Component {
     this._viewer.importAnnotationCommand(data.xfdf, false);
   };
 
-  onExportAnnotationCommand = ({action, xfdfCommand}) => {
+  onExportAnnotationCommand = object => {
+    const {action, xfdfCommand} = object;
     // action = add / modify / delete
-    console.log('xfdf');
-    console.log(xfdfCommand);
     this.socket.emit('annotationChanged', {
-      userId: this.state.currentUser,
+      annotationId: String(Date.now()),
       documentId: this.state.documentId,
       xfdf: xfdfCommand,
       action,
