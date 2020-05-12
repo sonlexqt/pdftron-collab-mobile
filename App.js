@@ -14,7 +14,7 @@ import axios from 'axios';
 import {DocumentView, RNPdftron} from 'react-native-pdftron';
 
 // TODO: replace this with your localhost IP
-const SERVER_URL = '192.168.1.86';
+const SERVER_URL = '192.168.88.108';
 
 export default class App extends Component {
   constructor(props) {
@@ -72,6 +72,7 @@ export default class App extends Component {
   };
 
   onDocumentLoaded = () => {
+    console.log('document loaded');
     axios
       .get(`http://${SERVER_URL}:3000/api/annotations`, {
         params: {
@@ -81,33 +82,61 @@ export default class App extends Component {
       .then(res => {
         const annotations = res.data;
         annotations.map(a =>
-          this._viewer.importAnnotations(a.xfdf).catch(err => {
+          this._viewer.importAnnotationCommand(a.xfdf, true).catch(err => {
             console.log('err');
             console.log(err);
           }),
         );
       });
     this.socket = io(`http://${SERVER_URL}:4000`);
+
     this.socket.on('annotationUpdated', this.onAnnotationUpdated);
   };
 
-  onAnnotationChanged = (action, annotations) => {};
+  onAnnotationChanged = ({action, annotations}) => {
+    console.log('annotations changed');
+    console.log(annotations);
+  };
 
   onAnnotationUpdated = data => {
-    console.log('=== onAnnotationUpdated ===')
-    console.log(data)
-    this._viewer.importAnnotationCommand(data.xfdf, false);
+    console.log('=== onAnnotationUpdated ===');
+    this._viewer?.importAnnotationCommand(data.xfdf, false);
+  };
+
+  getAnnotationId = xfdf => {
+    let begin = xfdf.indexOf('name');
+    let end = xfdf.indexOf('icon');
+    let annotationId = xfdf.slice(begin + 6, end - 2);
+    return annotationId;
   };
 
   onExportAnnotationCommand = object => {
     const {action, xfdfCommand} = object;
-    // action = add / modify / delete
-    this.socket.emit('annotationChanged', {
-      annotationId: String(Date.now()),
-      documentId: this.state.documentId,
-      xfdf: xfdfCommand,
-      action,
-    });
+    const anntaionId = this.getAnnotationId(xfdfCommand);
+    switch (action) {
+      case 'add': {
+        this.socket.emit('annotationChanged', {
+          annotationId: anntaionId,
+          documentId: this.state.documentId,
+          xfdf: xfdfCommand,
+          action,
+        });
+        break;
+      }
+      case 'modify': {
+        this.socket.emit('annotationChanged', {
+          annotationId: anntaionId,
+          documentId: this.state.documentId,
+          xfdf: xfdfCommand,
+          action,
+        });
+
+        break;
+      }
+      case 'delete':
+        break;
+      default:
+    }
   };
 
   render() {
