@@ -100,43 +100,34 @@ export default class App extends Component {
 
   onAnnotationUpdated = data => {
     console.log('=== onAnnotationUpdated ===');
+
     this._viewer?.importAnnotationCommand(data.xfdf, false);
   };
 
-  getAnnotationId = xfdf => {
-    let begin = xfdf.indexOf('name');
-    let end = xfdf.indexOf('icon');
-    let annotationId = xfdf.slice(begin + 6, end - 2);
+  getAnnotationId = (action, xfdf) => {
+    let annotationId;
+    if (action === 'add' || action === 'modify') {
+      let begin = xfdf.indexOf('name');
+      let end = xfdf.indexOf('icon');
+      annotationId = xfdf.slice(begin + 6, end - 2);
+    } else if (action === 'delete') {
+      let begin = xfdf.indexOf('<id>');
+      let end = xfdf.indexOf('</id>');
+      annotationId = xfdf.slice(begin + 4, end);
+    }
+
     return annotationId;
   };
 
   onExportAnnotationCommand = object => {
     const {action, xfdfCommand} = object;
-    const anntaionId = this.getAnnotationId(xfdfCommand);
-    switch (action) {
-      case 'add': {
-        this.socket.emit('annotationChanged', {
-          annotationId: anntaionId,
-          documentId: this.state.documentId,
-          xfdf: xfdfCommand,
-          action,
-        });
-        break;
-      }
-      case 'modify': {
-        this.socket.emit('annotationChanged', {
-          annotationId: anntaionId,
-          documentId: this.state.documentId,
-          xfdf: xfdfCommand,
-          action,
-        });
-
-        break;
-      }
-      case 'delete':
-        break;
-      default:
-    }
+    const anntaionId = this.getAnnotationId(action, xfdfCommand);
+    this.socket.emit('annotationChanged', {
+      annotationId: anntaionId,
+      documentId: this.state.documentId,
+      xfdf: xfdfCommand,
+      action,
+    });
   };
 
   render() {
