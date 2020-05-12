@@ -14,7 +14,7 @@ import axios from 'axios';
 import {DocumentView, RNPdftron} from 'react-native-pdftron';
 
 // TODO: replace this with your localhost IP
-const SERVER_URL = '192.168.88.108';
+const SERVER_URL = '192.168.88.31';
 
 export default class App extends Component {
   constructor(props) {
@@ -100,6 +100,7 @@ export default class App extends Component {
 
   onAnnotationUpdated = data => {
     console.log('=== onAnnotationUpdated ===');
+    console.log(data)
     this._viewer?.importAnnotationCommand(data.xfdf, false);
   };
 
@@ -112,31 +113,13 @@ export default class App extends Component {
 
   onExportAnnotationCommand = object => {
     const {action, xfdfCommand} = object;
-    const anntaionId = this.getAnnotationId(xfdfCommand);
-    switch (action) {
-      case 'add': {
-        this.socket.emit('annotationChanged', {
-          annotationId: anntaionId,
-          documentId: this.state.documentId,
-          xfdf: xfdfCommand,
-          action,
-        });
-        break;
-      }
-      case 'modify': {
-        this.socket.emit('annotationChanged', {
-          annotationId: anntaionId,
-          documentId: this.state.documentId,
-          xfdf: xfdfCommand,
-          action,
-        });
-
-        break;
-      }
-      case 'delete':
-        break;
-      default:
-    }
+    const annotationId = this.getAnnotationId(xfdfCommand);
+    this.socket.emit('annotationChanged', {
+      annotationId,
+      documentId: this.state.documentId,
+      xfdf: xfdfCommand,
+      action,
+    });
   };
 
   render() {
