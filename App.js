@@ -13,8 +13,8 @@ import axios from 'axios';
 
 import {DocumentView, RNPdftron} from 'react-native-pdftron';
 
-// TODO: replace this with your localhost IP
-const SERVER_URL = '192.168.88.31';
+// TODO: replace this with your localhost IP (10.0.2.2 for windows)
+const SERVER_URL = '10.0.2.2';
 
 export default class App extends Component {
   constructor(props) {
@@ -106,10 +106,10 @@ export default class App extends Component {
   getAnnotationId = (action, xfdf) => {
     let annotationId;
     if (action === 'add' || action === 'modify') {
-      let begin = xfdf.indexOf('name');
-      let end = xfdf.indexOf('icon');
-      annotationId = xfdf.slice(begin + 6, end - 2);
+      let temp = xfdf.slice(xfdf.indexOf('name') + 6, -1);
+      annotationId = temp.slice(0,temp.indexOf(' ') -1);
     } else if (action === 'delete') {
+
       let begin = xfdf.indexOf('<id>');
       let end = xfdf.indexOf('</id>');
       annotationId = xfdf.slice(begin + 4, end);
