@@ -13,8 +13,8 @@ import axios from 'axios';
 
 import {DocumentView, RNPdftron} from 'react-native-pdftron';
 
-// TODO: replace this with your localhost IP (10.0.2.2 for windows)
-const SERVER_URL = '10.0.2.2';
+// TODO: replace this with your localhost IP
+const SERVER_URL = '192.168.88.108';
 
 export default class App extends Component {
   constructor(props) {
@@ -90,6 +90,10 @@ export default class App extends Component {
       });
     this.socket = io(`http://${SERVER_URL}:4000`);
 
+    this.socket.emit('userJoinRoom', {
+      userName: this.state.currentUser,
+      room: this.state.documentId,
+    });
     this.socket.on('annotationUpdated', this.onAnnotationUpdated);
   };
 
@@ -107,9 +111,8 @@ export default class App extends Component {
     let annotationId;
     if (action === 'add' || action === 'modify') {
       let temp = xfdf.slice(xfdf.indexOf('name') + 6, -1);
-      annotationId = temp.slice(0,temp.indexOf(' ') -1);
+      annotationId = temp.slice(0, temp.indexOf(' ') - 1);
     } else if (action === 'delete') {
-
       let begin = xfdf.indexOf('<id>');
       let end = xfdf.indexOf('</id>');
       annotationId = xfdf.slice(begin + 4, end);
