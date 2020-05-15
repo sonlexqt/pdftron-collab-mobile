@@ -14,7 +14,7 @@ import axios from 'axios';
 import {DocumentView, RNPdftron} from 'react-native-pdftron';
 
 // TODO: replace this with your localhost IP
-const SERVER_URL = '192.168.88.108';
+const SERVER_URL = '167.71.203.225';
 
 export default class App extends Component {
   constructor(props) {
@@ -140,15 +140,15 @@ export default class App extends Component {
         </View>
       );
     }
-
+    const user = `${this.state.currentUser}_${Platform.OS}`
+    // const wvsPath = `http://192.168.1.54:8090/blackbox/GetPDF?uri=${encodeURIComponent(path)}&fmt=data`;
     const path =
       'https://pdftron.s3.amazonaws.com/downloads/pl/PDFTRON_mobile_about.pdf';
-    // const wvsPath = `http://192.168.1.54:8090/blackbox/GetPDF?uri=${encodeURIComponent(path)}&fmt=data`;
-
+    // const wvsPath = `https://webhook.site/c44f4fb7-098e-4f05-949c-6f83ef7d0ebc/blackbox/GetPDF?uri=my-doc-uri`;
     return (
       <DocumentView
-        ref={c => (this._viewer = c)}
         document={path}
+        ref={c => (this._viewer = c)}
         showLeadingNavButton={true}
         leadingNavButtonIcon={
           Platform.OS === 'ios'
@@ -160,8 +160,8 @@ export default class App extends Component {
         onAnnotationChanged={this.onAnnotationChanged}
         onExportAnnotationCommand={this.onExportAnnotationCommand}
         collabEnabled={true}
-        currentUser={this.state.currentUser}
-        annotationAuthor={this.state.currentUser}
+        currentUser={user}
+        annotationAuthor={user}
       />
     );
   }
