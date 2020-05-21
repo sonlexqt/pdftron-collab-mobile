@@ -13,7 +13,7 @@
     "axios": "^0.19.2",
     "react": "16.11.0",
     "react-native": "0.62.2",
-    "react-native-pdftron": "https://github.com/PDFTron/pdftron-react-native.git",
+    "react-native-pdftron": "github:PDFTron/pdftron-react-native",
     "socket.io-client": "^2.3.0"
   },
   "devDependencies": {

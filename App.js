@@ -104,7 +104,10 @@ export default class App extends Component {
 
   onAnnotationUpdated = data => {
     console.log('=== onAnnotationUpdated ===');
-    this._viewer?.importAnnotationCommand(data.xfdf, false);
+    if (data && data.xfdf) {
+      this._viewer?.importAnnotationCommand(data.xfdf, false);
+    }
+
   };
 
   getAnnotationId = (action, xfdf) => {
@@ -140,11 +143,10 @@ export default class App extends Component {
         </View>
       );
     }
-    const user = `${this.state.currentUser}_${Platform.OS}`
+    const user = `${this.state.currentUser}_${Platform.OS}`;
     // const wvsPath = `http://192.168.1.54:8090/blackbox/GetPDF?uri=${encodeURIComponent(path)}&fmt=data`;
     const path =
       'https://pdftron.s3.amazonaws.com/downloads/pl/PDFTRON_mobile_about.pdf';
-    // const wvsPath = `https://webhook.site/c44f4fb7-098e-4f05-949c-6f83ef7d0ebc/blackbox/GetPDF?uri=my-doc-uri`;
     return (
       <DocumentView
         document={path}
