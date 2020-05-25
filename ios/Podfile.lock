@@ -70,7 +70,7 @@ PODS:
   - OpenSSL-Universal (1.0.2.19):
     - OpenSSL-Universal/Static (= 1.0.2.19)
   - OpenSSL-Universal/Static (1.0.2.19)
-  - PDFNet (74948.2020-05-20.stable)
+  - PDFNet (74976.2020-05-22.stable)
   - RCTRequired (0.62.2)
   - RCTTypeSafety (0.62.2):
     - FBLazyVector (= 0.62.2)
@@ -325,7 +325,7 @@ DEPENDENCIES:
   - FlipperKit/SKIOSNetworkPlugin (~> 0.33.1)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - PDFNet (from `http://nightly.pdftron.com.s3.amazonaws.com/stable/2020-05-20/7.1/cocoapods/pdfnet/2020-05-20_stable_rev74948.podspec`)
+  - PDFNet (from `http://nightly.pdftron.com.s3.amazonaws.com/stable/2020-05-22/7.1/cocoapods/pdfnet/2020-05-22_stable_rev74976.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -378,7 +378,7 @@ EXTERNAL SOURCES:
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   PDFNet:
-    :podspec: http://nightly.pdftron.com.s3.amazonaws.com/stable/2020-05-20/7.1/cocoapods/pdfnet/2020-05-20_stable_rev74948.podspec
+    :podspec: http://nightly.pdftron.com.s3.amazonaws.com/stable/2020-05-22/7.1/cocoapods/pdfnet/2020-05-22_stable_rev74976.podspec
   RCTRequired:
     :path: "../node_modules/react-native/Libraries/RCTRequired"
   RCTTypeSafety:
@@ -439,7 +439,7 @@ SPEC CHECKSUMS:
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   OpenSSL-Universal: 8b48cc0d10c1b2923617dfe5c178aa9ed2689355
-  PDFNet: 36ddbdcc6fda7877c6b1dc1354b7078a45993b06
+  PDFNet: db80da2b7a71dbd10d7ed0a350e641ab5936b41c
   RCTRequired: cec6a34b3ac8a9915c37e7e4ad3aa74726ce4035
   RCTTypeSafety: 93006131180074cffa227a1075802c89a49dd4ce
   React: 29a8b1a02bd764fb7644ef04019270849b9a7ac3
@@ -463,6 +463,6 @@ SPEC CHECKSUMS:
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: cae5e9792f3fe7a1e4d3ac983365cc0a250449f6
+PODFILE CHECKSUM: 29e8c83fcc4a697984883f1ce39cb6fdbc40c5c8
 
 COCOAPODS: 1.9.1

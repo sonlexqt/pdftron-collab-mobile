@@ -5097,10 +5097,6 @@ react-is@^16.12.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6:
   version "1.0.0"
   resolved "https://codeload.github.com/PDFTron/pdftron-react-native/tar.gz/58abaf4b9839f34d32bdce483db1b0a811176abe"
 
-"react-native-pdftron@github:PDFTron/pdftron-react-native#custom-headers-fix":
-  version "1.0.0"
-  resolved "https://codeload.github.com/PDFTron/pdftron-react-native/tar.gz/e2696f816f71e0e156b17b7584fbbfbc92128f01"
-
 react-native@0.62.2:
   version "0.62.2"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.62.2.tgz#d831e11a3178705449142df19a70ac2ca16bad10"

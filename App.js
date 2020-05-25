@@ -13,8 +13,8 @@ import axios from 'axios';
 
 import {DocumentView, RNPdftron} from 'react-native-pdftron';
 
-// TODO: replace this with your localhost IP
-const SERVER_URL = '167.71.203.225';
+// TODO: replace this with your localhost IP, e.g 192.168.88.31
+const SERVER_URL = '165.227.202.209';
 
 export default class App extends Component {
   constructor(props) {
