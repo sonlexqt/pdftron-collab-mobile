@@ -146,7 +146,7 @@ export default class App extends Component {
     const user = `${this.state.currentUser}_${Platform.OS}`;
     // const wvsPath = `http://192.168.1.54:8090/blackbox/GetPDF?uri=${encodeURIComponent(path)}&fmt=data`;
     const path =
-      'https://pdftron.s3.amazonaws.com/downloads/pl/PDFTRON_mobile_about.pdf';
+      'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
     return (
       <DocumentView
         document={path}
