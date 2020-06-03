@@ -77,7 +77,7 @@ target 'PDFTronCollab' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'PDFNet', podspec: 'http://nightly.pdftron.com.s3.amazonaws.com/stable/2020-05-27/7.1/cocoapods/pdfnet/2020-05-27_stable_rev75007.podspec'
+  pod 'PDFNet', podspec: 'http://nightly.pdftron.com.s3.amazonaws.com/stable/2020-06-02/7.1/cocoapods/pdfnet/2020-06-02_stable_rev75036.podspec'
   pod 'RNPdftron', :path => '../node_modules/react-native-pdftron'
 
   target 'PDFTronCollabTests' do
